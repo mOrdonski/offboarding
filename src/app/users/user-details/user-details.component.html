@@ -1,0 +1,58 @@
+<div
+  class="flex h-[calc(100%-40px)] w-full flex-col gap-10 bg-gray-200 px-5 sm:px-20"
+>
+  <a class="mt-10 flex w-fit items-center font-medium" routerLink="../">
+    <mat-icon inline>chevron_left</mat-icon>
+    <span> Back </span>
+  </a>
+  <div class="flex flex-row justify-between">
+    <h1 class="text-3xl font-semibold">{{ user().name }}</h1>
+    <button
+      (click)="openOffboardingDialog()"
+      class="h-10 cursor-pointer rounded rounded-full bg-orange-400 p-2 px-5 font-medium text-black"
+      [disabled]="user().status === UserStatus.OFFBOARDED"
+    >
+      Offboard
+    </button>
+  </div>
+  <div>
+    <h2 class="text-lg font-medium">Employee Details</h2>
+
+    <div class="mb-5 border-t border-b border-orange-300"></div>
+
+    <div class="flex w-full flex-wrap gap-8">
+      <div class="flex flex-row gap-2">
+        <span class="flex font-medium">Full Name:</span>
+        <span>{{ user().name }}</span>
+      </div>
+      <div class="flex flex-row gap-2">
+        <span class="flex font-medium">Department:</span>
+        <span>{{ user().department }}</span>
+      </div>
+      <div class="flex flex-row gap-2">
+        <span class="flex font-medium">Email:</span>
+        <span>{{ user().email }}</span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h2 class="text-lg font-medium">Equipment</h2>
+
+    <div class="mb-5 border-t border-b border-orange-300"></div>
+
+    <div class="flex w-full flex-col flex-wrap">
+      @for (
+        equipment of user().equipments;
+        track equipment.id;
+        let last = $last
+      ) {
+        <span>
+          {{ equipment.name }}
+        </span>
+        @if (!last) {
+          <div class="my-3 border-t border-b border-gray-300"></div>
+        }
+      }
+    </div>
+  </div>
+</div>
