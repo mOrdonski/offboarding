@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
+import { OffboardRequestBody } from '../../shared/interfaces/offboard-request-body.dto';
 import { User } from '../../shared/interfaces/user.dto';
 
 export const UsersActions = createActionGroup({
@@ -18,5 +19,9 @@ export const UsersActions = createActionGroup({
     'Fetch Users': emptyProps(),
     'Fetch Users Success': props<{ users: User[] }>(),
     'Fetch Users Failure': emptyProps(),
+
+    'Offboard User': props<{ userId: string; data: OffboardRequestBody }>(),
+    'Offboard User Success': emptyProps(),
+    'Offboard User Failure': emptyProps(),
   },
 });

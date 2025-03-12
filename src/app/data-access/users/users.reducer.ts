@@ -1,5 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 
+import { UserStatus } from '../../shared/enums/user-status.enum';
 import { User } from '../../shared/interfaces/user.dto';
 import { UsersActions } from './users.actions';
 
@@ -26,6 +27,19 @@ export const usersFeature = createFeature({
     on(UsersActions.fetchUserSuccess, (state, { user }) => ({
       ...state,
       selectedUser: user,
+    })),
+
+    on(UsersActions.offboardUserSuccess, (state) => ({
+      ...state,
+      selectedUser: {
+        ...state.selectedUser,
+        status: UserStatus.OFFBOARDED,
+      },
+      users: state.users.map((user: User) =>
+        user.id === state.selectedUser.id
+          ? { ...user, status: UserStatus.OFFBOARDED }
+          : user,
+      ),
     })),
   ),
 });
