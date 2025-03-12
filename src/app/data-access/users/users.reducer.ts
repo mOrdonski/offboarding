@@ -5,10 +5,12 @@ import { UsersActions } from './users.actions';
 
 export interface Users {
   users: User[];
+  selectedUser: User;
 }
 
 const initialState: Users = {
   users: [],
+  selectedUser: {} as User,
 };
 
 export const usersFeature = createFeature({
@@ -19,6 +21,11 @@ export const usersFeature = createFeature({
     on(UsersActions.fetchUsersSuccess, (state, { users }) => ({
       ...state,
       users,
+    })),
+
+    on(UsersActions.fetchUserSuccess, (state, { user }) => ({
+      ...state,
+      selectedUser: user,
     })),
   ),
 });

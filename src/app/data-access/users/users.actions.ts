@@ -8,6 +8,13 @@ export const UsersActions = createActionGroup({
     'Enter Users List': emptyProps(),
     'Leave Users List': emptyProps(),
 
+    'Enter User Details': emptyProps(),
+    'Leave User Details': emptyProps(),
+
+    'Fetch User': props<{ userId: string }>(),
+    'Fetch User Success': props<{ user: User }>(),
+    'Fetch User Failure': emptyProps(),
+
     'Fetch Users': emptyProps(),
     'Fetch Users Success': props<{ users: User[] }>(),
     'Fetch Users Failure': emptyProps(),
