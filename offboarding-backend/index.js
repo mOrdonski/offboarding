@@ -106,7 +106,7 @@ app.get("/users/:id", (request, response) => {
     name: "John Doe",
     department: "Engineering",
     email: "some.email@wp.pl",
-    status: "OFFBOARDED",
+    status: "ACTIVE",
     equipments: [
       {
         id: "1",

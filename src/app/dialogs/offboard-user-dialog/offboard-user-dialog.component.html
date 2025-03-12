@@ -1,0 +1,97 @@
+<div class="flex justify-end">
+  <mat-icon mat-dialog-close class="mt-5 mr-5 h-fit cursor-pointer">
+    close
+  </mat-icon>
+</div>
+<h1 class="flex justify-center text-3xl font-semibold">Offboard</h1>
+
+<form [formGroup]="form" class="flex flex-col gap-2 p-10">
+  <mat-form-field appearance="outline">
+    <mat-label>Receiver</mat-label>
+    <input matInput formControlName="receiver" />
+    @if (form.get("receiver")?.getError("required")) {
+      <mat-error>This field is required.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" />
+    @if (form.get("email")?.getError("required")) {
+      <mat-error>This field is required.</mat-error>
+    }
+    @if (form.get("email")?.getError("email")) {
+      <mat-error>Wrong email format.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Phone</mat-label>
+    <input matInput formControlName="phone" type="tel" />
+    @if (form.get("phone")?.getError("required")) {
+      <mat-error>This field is required.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Street Address</mat-label>
+    <input matInput formControlName="streetLine" />
+    @if (form.get("streetLine")?.getError("required")) {
+      <mat-error>This field is required.</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="flex flex-row gap-2">
+    <mat-form-field appearance="outline" class="w-6/10">
+      <mat-label>City</mat-label>
+      <input matInput formControlName="city" />
+      @if (form.get("city")?.getError("required")) {
+        <mat-error>This field is required.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-4/10">
+      <mat-label>Postal Code</mat-label>
+      <input matInput mask="00-000" formControlName="postalCode" />
+      @if (form.get("postalCode")?.getError("required")) {
+        <mat-error>This field is required.</mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Country</mat-label>
+    <input matInput formControlName="country" />
+    @if (form.get("country")?.getError("required")) {
+      <mat-error>This field is required.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Notes</mat-label>
+    <textarea matInput formControlName="notes" rows="4"></textarea>
+
+    @if (form.get("notes")?.getError("required")) {
+      <mat-error>This field is required.</mat-error>
+    }
+    @if (form.get("notes")?.getError("minlength")) {
+      <mat-error>This field requires at least 20 signs.</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="flex flex-row justify-end gap-2">
+    <button
+      mat-dialog-close
+      class="w-min cursor-pointer rounded rounded-full border border-gray-300 px-5 py-2 font-medium text-black"
+    >
+      Cancel
+    </button>
+    <button
+      [mat-dialog-close]="form.value"
+      class="w-min cursor-pointer rounded rounded-full bg-orange-400 px-5 py-2 font-medium text-black"
+      [disabled]="!form.valid"
+    >
+      Confirm
+    </button>
+  </div>
+</form>

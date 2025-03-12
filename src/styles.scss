@@ -12,3 +12,7 @@ body {
 .mdc-notched-outline__notch {
   border-right: none !important;
 }
+
+button:disabled {
+  opacity: 0.5;
+}
