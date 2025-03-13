@@ -6,12 +6,10 @@ import { UsersActions } from './users.actions';
 
 export interface Users {
   users: User[];
-  selectedUserId: string;
 }
 
 const initialState: Users = {
   users: [],
-  selectedUserId: '',
 };
 
 export const usersFeature = createFeature({

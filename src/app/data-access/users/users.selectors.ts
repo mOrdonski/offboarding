@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import { usersFeature } from './users.reducer';
 
-export const { selectUsers, selectSelectedUserId } = usersFeature;
+export const { selectUsers } = usersFeature;
 
 export const selectUserById = (userId: string) =>
   createSelector(selectUsers, (users) =>
