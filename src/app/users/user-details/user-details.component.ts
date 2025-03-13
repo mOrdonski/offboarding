@@ -1,5 +1,12 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit, Signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnDestroy,
+  OnInit,
+  Signal,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,7 +16,7 @@ import { filter, Observable, tap } from 'rxjs';
 
 import { selectRouteParam } from '../../data-access/router/router.selectors';
 import { UsersActions } from '../../data-access/users/users.actions';
-import { selectSelectedUser } from '../../data-access/users/users.selectors';
+import { selectUserById } from '../../data-access/users/users.selectors';
 import { OffboardUserDialogComponent } from '../../dialogs/offboard-user-dialog/offboard-user-dialog.component';
 import { UserStatus } from '../../shared/enums/user-status.enum';
 import { OffboardRequestBody } from '../../shared/interfaces/offboard-request-body.dto';
@@ -32,7 +39,13 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   userId: Signal<string | undefined> = this.store.selectSignal(
     selectRouteParam('userId'),
   );
-  user: Signal<User> = this.store.selectSignal(selectSelectedUser);
+  user: Signal<User> = computed(
+    () =>
+      this.store.selectSignal(
+        selectUserById(this.userId() as string),
+      )() as User,
+  );
+
   offboardingDialogClosed$: Observable<OffboardRequestBody> =
     new Observable<OffboardRequestBody>();
   UserStatus = UserStatus;

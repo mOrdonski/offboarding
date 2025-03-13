@@ -6,12 +6,12 @@ import { UsersActions } from './users.actions';
 
 export interface Users {
   users: User[];
-  selectedUser: User;
+  selectedUserId: string;
 }
 
 const initialState: Users = {
   users: [],
-  selectedUser: {} as User,
+  selectedUserId: '',
 };
 
 export const usersFeature = createFeature({
@@ -24,21 +24,11 @@ export const usersFeature = createFeature({
       users,
     })),
 
-    on(UsersActions.fetchUserSuccess, (state, { user }) => ({
+    on(UsersActions.offboardUserSuccess, (state, { userId }) => ({
       ...state,
-      selectedUser: user,
-    })),
 
-    on(UsersActions.offboardUserSuccess, (state) => ({
-      ...state,
-      selectedUser: {
-        ...state.selectedUser,
-        status: UserStatus.OFFBOARDED,
-      },
       users: state.users.map((user: User) =>
-        user.id === state.selectedUser.id
-          ? { ...user, status: UserStatus.OFFBOARDED }
-          : user,
+        user.id === userId ? { ...user, status: UserStatus.OFFBOARDED } : user,
       ),
     })),
   ),
