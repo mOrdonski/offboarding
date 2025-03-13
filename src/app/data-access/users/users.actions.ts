@@ -12,16 +12,14 @@ export const UsersActions = createActionGroup({
     'Enter User Details': emptyProps(),
     'Leave User Details': emptyProps(),
 
-    'Fetch User': props<{ userId: string }>(),
-    'Fetch User Success': props<{ user: User }>(),
-    'Fetch User Failure': emptyProps(),
-
     'Fetch Users': emptyProps(),
     'Fetch Users Success': props<{ users: User[] }>(),
     'Fetch Users Failure': emptyProps(),
 
     'Offboard User': props<{ userId: string; data: OffboardRequestBody }>(),
-    'Offboard User Success': emptyProps(),
+    'Offboard User Success': props<{
+      userId: string;
+    }>(),
     'Offboard User Failure': emptyProps(),
   },
 });
